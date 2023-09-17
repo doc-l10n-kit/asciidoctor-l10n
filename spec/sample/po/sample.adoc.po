@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. type: Title =
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:6
+msgid "Sample Guide"
+msgstr "サンプルガイド"
+
+#. type: Plain Text
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:13
+msgid "This is a sample text."
+msgstr "これはサンプルテキストです。"
+
+#. type: Plain Text
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:15
+msgid "This is a second paragraph."
+msgstr "これは2段落目です。"
+
+#. type: Plain Text
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:17
+msgid "This is a note section."
+msgstr "これはメモセクションです。"
+
+#. type: Title ==
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:19
+msgid "Header level2"
+msgstr "ヘッダー・レベル2"
+
+#. type: Plain Text
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:21
+msgid "This is a section next to header level2."
+msgstr "これはヘッダーレベル2の次のセクションです。"
+
+#. type: Title ===
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:23
+msgid "Header level3"
+msgstr "ヘッダー・レベル3"
+
+#. type: Plain Text
+#: C:/Users/ynojima/workspace/doc-l10n-kit/build/resources/test/adoc/sample.adoc:25
+msgid ""
+"This is a section with line breaks.\n"
+"Second line.\n"
+"Third line."
+msgstr ""
