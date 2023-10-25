@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in asciidoctor-l10n.gemspec
+# Specify your gem's dependencies in jekyll-l10n.gemspec
 gemspec
 
 gem "rake", "~> 13.0"

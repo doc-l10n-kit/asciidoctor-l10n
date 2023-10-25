@@ -95,10 +95,12 @@ X-Generator: jekyll-l10n
 
         private def load_po_object(path)
           po = GetText::PO.new
-          parser = GetText::POParser.new
-          parser.report_warning = false
-          parser.ignore_fuzzy = false
-          parser.parse_file(path, po)
+          if Pathname.new(path).exist?
+              parser = GetText::POParser.new
+              parser.report_warning = false
+              parser.ignore_fuzzy = false
+              parser.parse_file(path, po)
+          end
           po
         end
 
