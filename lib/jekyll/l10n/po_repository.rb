@@ -38,9 +38,13 @@ module Jekyll
       end
 
       def save_file(po)
-        path = po.path
-        File.open(path, mode = "w") do |file|
+        perm = 0
+        File.open(po.path) do |po_file|
+          perm = po_file.stat.mode
+        end
+        File.open(po.path + "~", "w", perm) do |file|
           po.write(file)
+          File.rename(file.path, po.path)
         end
       end
 
