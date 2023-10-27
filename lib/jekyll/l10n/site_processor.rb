@@ -20,36 +20,46 @@ module Jekyll
         map = {}
 
         @site.documents.each do |jekyll_document|
-          if jekyll_document.data['asciidoc']
-            asciidoctor_document = jekyll_document.data['document']
-            site_source = asciidoctor_document.attributes['site-source']
-            asciidoc = Jekyll::L10n::Model::Asciidoc.new(asciidoctor_document)
+          begin
+            if jekyll_document.data['asciidoc']
+              asciidoctor_document = jekyll_document.data['document']
+              site_source = asciidoctor_document.attributes['site-source']
+              asciidoc = Jekyll::L10n::Model::Asciidoc.new(asciidoctor_document)
 
-            sentences =
-              extract_document_sentences(jekyll_document) + asciidoc.extract_sentences
+              sentences =
+                extract_document_sentences(jekyll_document) + asciidoc.extract_sentences
 
-            sentences.each do |sentence|
-              sentence_document_path = sentence.source
-              po_file_path = Jekyll::L10n::Util.resolve_po_path(sentence_document_path, @jekyll_l10n_config.po_base_dir).to_path
-              list = map[po_file_path]
-              if list.nil?
-                list = []
-                map[po_file_path] = list
+              sentences.each do |sentence|
+                sentence_document_path = sentence.source
+                po_file_path = Jekyll::L10n::Util.resolve_po_path(sentence_document_path, @jekyll_l10n_config.po_base_dir).to_path
+                list = map[po_file_path]
+                if list.nil?
+                  list = []
+                  map[po_file_path] = list
+                end
+                list.append(sentence)
               end
-              list.append(sentence)
             end
+          rescue => e
+            logger.error("Failed to process #{jekyll_document.data['document'].attributes['docfile']}")
+            raise e
           end
         end
 
         map.each_key do |po_file_path|
-          FileUtils.makedirs Pathname(po_file_path).dirname.to_path
-          list = map[po_file_path]
-          po = @po_repository.load_file(po_file_path)
-          if po.nil?
-            po = @po_repository.create_file(po_file_path)
+          begin
+            FileUtils.makedirs Pathname(po_file_path).dirname.to_path
+            list = map[po_file_path]
+            po = @po_repository.load_file(po_file_path)
+            if po.nil?
+              po = @po_repository.create_file(po_file_path)
+            end
+            po.update_entries(list)
+            @po_repository.save_file(po)
+          rescue => e
+            logger.error("Failed to process #{po_file_path}")
+            raise e
           end
-          po.update_entries(list)
-          @po_repository.save_file(po)
         end
       end
 
