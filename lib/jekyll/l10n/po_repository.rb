@@ -39,8 +39,12 @@ module Jekyll
 
       def save_file(po)
         perm = 0
-        File.open(po.path) do |po_file|
-          perm = po_file.stat.mode
+        if Pathname.new(po.path).exist?
+          File.open(po.path) do |po_file|
+            perm = po_file.stat.mode
+          end
+        else
+          perm = 0664
         end
         File.open(po.path + "~", "w", perm) do |file|
           po.write(file)
