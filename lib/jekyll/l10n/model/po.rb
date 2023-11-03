@@ -35,7 +35,9 @@ Content-Transfer-Encoding: 8bit
 X-Generator: jekyll-l10n
           EOS
 
-          @po[header.msgid] = header
+          unless @po.has_key?(header.msgid)
+            @po[header.msgid] = header
+          end
 
         end
 
