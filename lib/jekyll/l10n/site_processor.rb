@@ -5,7 +5,6 @@ require_relative './model/document_title'
 require_relative './model/document_synopsis'
 require_relative './model/page_title'
 require_relative './model/page_intro'
-require 'debug'
 
 module Jekyll
   module L10n
