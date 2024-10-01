@@ -12,16 +12,9 @@ module Jekyll
         end
 
         def source
-          file = @node.file
-          parent = @node.parent
-          while file == nil && parent != nil
-            file = parent.file
-            parent = parent.parent
-          end
-          if file.nil?
-            file = @node.document.attributes['docfile']
-          end
-          site_source = @node.document.attributes['site-source']
+          file = @node.document.options[:attributes]['docfile']
+          site_source = @node.document.options[:attributes]['site-source']
+
           Pathname(file).relative_path_from(site_source).to_path
         end
 
