@@ -12,7 +12,23 @@ module Jekyll
         end
 
         def source
-          file = @node.document.options[:attributes]['docfile']
+          # look up actual file the node belongs
+          source_location = @node.source_location
+          parent = @node.parent
+          while source_location == nil && parent != nil
+            source_location = parent.source_location
+            parent = parent.parent
+          end
+
+
+          file = nil
+          # if the file the node belongs is not found, uses docfile instead
+          if source_location.nil? || source_location.file.nil?
+            file = @node.document.options[:attributes]['docfile']
+          else
+            file = File.absolute_path(source_location.file, source_location.dir)
+          end
+
           site_source = @node.document.options[:attributes]['site-source']
 
           Pathname(file).relative_path_from(site_source).to_path
